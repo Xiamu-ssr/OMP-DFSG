@@ -1,0 +1,34 @@
+﻿/*change下文件名都不要更改,有需要cp -r拷贝*/
+/*如果有结点在DFS时被孤立,resbig.txt末尾会多出几行一样的数据,删除保留一行就行*/
+
+handleDict.cpp:生成映射对照表
+handleInput.cpp:处理输入文件,输出已映射的数据文件,内存占用更小
+handleInputSort.cpp:处理输入文件,按起点顺序输出已映射的数据文件,内存占用更小
+handleRes.cpp:处理结果文件,输出反映射的结果文件
+dataCheckWithShared.cpp:如下
+
+===1===确认文件中有多少结点和边,以及结点的最大最小值
+dataCheckWithShared.cpp
+    |--1个参数
+        |--输入文件的位置,就是每一行2个结点编号的数据集
+    |--输出input_file属性,包括结点个数,边的个数,结点最小最大编号
+    |--用法举例: ./dataCheckWithShared ../data/data1.txt
+
+===2===对Input_file的结点编号做映射处理,生成vector能接受的范围
+first.sh
+    |--1个参数
+        |--待处理文件位置,就是每一行2个结点编号的数据集
+        |--结点数
+        |--边数
+    |--输出文件
+        |--dict.txt:映射对照表
+        |--datasmall.txt:结果文件,可作为DFSG的输入文件
+    |--用法举例: bash first.sh ../data/data1.txt 4039 88234
+
+===3===将Res_file做反映射处理,纠正res
+second.sh
+    |--1个参数
+        |--待处理文件位置,res.txt每一行一个结点编号
+    |--输出文件
+        |--resbig.txt:结果文件
+    |--用法举例: bash first.sh ../res/res1.txt
